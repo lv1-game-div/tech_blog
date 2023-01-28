@@ -1,12 +1,17 @@
 import { GetServerSideProps } from 'next';
 import type { Blog } from '../../types/blog';
+import type { Highlightbody } from '../../types/highlightbody';
 import { client } from '../../libs/client';
+import { load } from "cheerio";
+import hljs from 'highlight.js'
+import 'highlight.js/styles/vs2015.css';
 
 type Props = {
   blog: Blog;
+  highlightbody: Highlightbody;
 };
 
-export default function Article({ blog }: Props) {
+export default function Article({ blog, highlightbody }: Props) {
   return (
     <div className="bg-gray-50">
       <div className="px-10 py-6 mx-auto">
@@ -28,9 +33,9 @@ export default function Article({ blog }: Props) {
             </div>
           )}
           <div className="mt-2">
-          <div dangerouslySetInnerHTML={{ __html: blog.body }}
-              className=" text-gray-700 mt-4 rounded ">
-            </div>
+            <div
+              dangerouslySetInnerHTML={{ __html: `${highlightbody}` }}
+              className=" text-gray-700 mt-4 rounded "></div>
           </div>
         </div>
       </div>
@@ -38,6 +43,7 @@ export default function Article({ blog }: Props) {
   );
 }
 
+// ssrでブログ詳細を取得
 export const getServerSideProps: GetServerSideProps = async ctx => {
   const id = ctx.params?.id;
   const idExceptArray = id instanceof Array ? id[0] : id;
@@ -46,9 +52,19 @@ export const getServerSideProps: GetServerSideProps = async ctx => {
     contentId: idExceptArray,
   });
 
+  // シンタックスハイライト処理
+  const $ = load(data.body);  // data.contentはmicroCMSから返されるリッチエディタ部分
+  $('pre code').each((_, elm) => {
+    const result = hljs.highlightAuto($(elm).text());
+    $(elm).html(result.value);
+    $(elm).addClass('hljs');
+  });
+  data.content = $.html();
+
   return {
     props: {
       blog: data,
+      highlightbody: data.content
     },
   };
 };
