@@ -6,7 +6,7 @@ export default function Header() {
       <div className="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
         <Link legacyBehavior href={'/'} passHref>
           <a className="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-            <span className="ml-3 text-xl text-white">My Blog</span>
+            <span className="ml-3 text-xl text-white">Tech Blog</span>
           </a>
         </Link>
         <nav className="md:ml-auto flex flex-wrap items-center text-base justify-center">
