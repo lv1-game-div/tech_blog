@@ -39,8 +39,11 @@ export default function Home({ blog }: Props) {
   );
 }
 
-export const getServerSideProps = async () => {
-  const data = await client.get({ endpoint: 'blog' });
+// ssgでmicroCMSからブログデータを取得
+export const getStaticProps = async () => {
+  const data = await client.get({
+    endpoint: `${process.env.microcmsEndpoint}`
+  });
 
   return {
     props: {

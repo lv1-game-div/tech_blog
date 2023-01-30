@@ -1,4 +1,3 @@
-import { GetServerSideProps } from 'next';
 import type { Blog } from '../../types/blog';
 import type { Highlightbody } from '../../types/highlightbody';
 import { client } from '../../libs/client';
@@ -43,12 +42,24 @@ export default function Article({ blog, highlightbody }: Props) {
   );
 }
 
-// ssrでブログ詳細を取得
-export const getServerSideProps: GetServerSideProps = async ctx => {
-  const id = ctx.params?.id;
+// パスを取得
+export const getStaticPaths = async () => {
+  const data = await client.get({
+    endpoint: `${process.env.microcmsEndpoint}`
+  });
+  const paths = data.contents.map((content: { id: string; }) => `/${process.env.microcmsEndpoint}/${content.id}`);
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+// ssgでmicroCMSからidに紐づくブログデータ取得
+export const getStaticProps = async (context: any) => {
+  const id = context.params.id;
   const idExceptArray = id instanceof Array ? id[0] : id;
   const data = await client.get({
-    endpoint: 'blog',
+    endpoint: `${process.env.microcmsEndpoint}`,
     contentId: idExceptArray,
   });
 
