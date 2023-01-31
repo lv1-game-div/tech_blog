@@ -1,3 +1,22 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* dangerouslySetInnerHTMLから渡された場合、スタイルが当たらないためリセットスタイルを定義 */
+h1 {
+  font-size: revert;
+  font-weight: revert;
+}
+h2 {
+  font-size: revert;
+  font-weight: revert;
+}
+
+h3 {
+  font-size: revert;
+  font-weight: revert;
+}
+
+a:hover {
+  color: blue;
+}
