@@ -4,7 +4,6 @@ import type { Highlightbody } from '../../types/highlightbody';
 import { client } from '../../libs/client';
 import { load } from "cheerio";
 import hljs from 'highlight.js'
-import 'highlight.js/styles/tech-blog-original.css'
 
 type Props = {
   blog: Blog;
