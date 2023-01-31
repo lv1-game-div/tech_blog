@@ -3,7 +3,6 @@ import type { Highlightbody } from '../../types/highlightbody';
 import { client } from '../../libs/client';
 import { load } from "cheerio";
 import hljs from 'highlight.js'
-import 'highlight.js/styles/vs2015.css';
 
 type Props = {
   blog: Blog;
@@ -13,8 +12,8 @@ type Props = {
 export default function Article({ blog, highlightbody }: Props) {
   return (
     <div className="bg-gray-50">
-      <div className="px-10 py-6 mx-auto">
-        <div className="max-w-6xl px-10 py-6 mx-auto bg-gray-50">
+      <div className="px-0 sm:px-10 py-6 mx-auto">
+        <div className="max-w-6xl px-0 sm:px-10 py-6 mx-auto bg-gray-50">
           <img
             className="object-cover w-full shadow-sm h-full"
             src={blog.thumbnail.url}
