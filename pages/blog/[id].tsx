@@ -41,7 +41,7 @@ export default function Article({ blog, highlightbody }: Props) {
   );
 }
 
-// パスを取得
+// ssgでパスを取得
 export const getStaticPaths = async () => {
   const data = await client.get({
     endpoint: `${process.env.microcmsEndpoint}`
