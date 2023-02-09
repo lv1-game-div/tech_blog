@@ -39,10 +39,13 @@ export default function Home({ blog }: Props) {
   );
 }
 
-// ssgでmicroCMSからブログデータを取得
+// ssgでmicroCMSから最新のブログデータを15件取得
 export const getStaticProps = async () => {
   const data = await client.get({
-    endpoint: `${process.env.microcmsEndpoint}`
+    endpoint: `${process.env.microcmsEndpoint}`,
+    queries: {
+      limit: 15
+    }
   });
 
   return {
