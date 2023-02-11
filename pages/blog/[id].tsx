@@ -44,7 +44,10 @@ export default function Article({ blog, highlightbody }: Props) {
 // ssgでパスを取得
 export const getStaticPaths = async () => {
   const data = await client.get({
-    endpoint: `${process.env.microcmsEndpoint}`
+    endpoint: `${process.env.microcmsEndpoint}`,
+    queries: {
+      limit: 15
+    }
   });
   const paths = data.contents.map((content: { id: string; }) => `/${process.env.microcmsEndpoint}/${content.id}`);
   return {
