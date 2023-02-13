@@ -37,7 +37,7 @@ export default function Home({ blog, totalCount }: Props) {
           </div>
         ))}
       </div>
-      <Pagination totalCount={totalCount} />
+      <Pagination totalCount={totalCount} currentPageNumber={0} />
     </>
   );
 }

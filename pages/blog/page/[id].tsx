@@ -40,7 +40,7 @@ export default function BlogPageId({ blog, totalCount }: Props) {
           </div>
         ))}
       </div>
-      <Pagination totalCount={totalCount} />
+      <Pagination totalCount={totalCount} currentPageNumber={0} />
     </>
   );
 }
@@ -69,7 +69,7 @@ export const getStaticPaths = async () => {
     endpoint: `${process.env.microcmsEndpoint}`
   });
 
-  const range = (start, end) => [...Array(end - start + 1)].map((_, i) => start + i);
+  const range = (start: number, end: number) => [...Array(end - start + 1)].map((_, i) => start + i);
 
   const paths = range(1, Math.ceil(repos.totalCount / PER_PAGE)).map((repo) => `/blog/page/${repo}`);
 
@@ -77,7 +77,7 @@ export const getStaticPaths = async () => {
 };
 
 // データを取得
-export const getStaticProps = async (context) => {
+export const getStaticProps = async (context: { params: { id: any; }; }) => {
   const id = context.params.id;
 
   const data = await client.get({

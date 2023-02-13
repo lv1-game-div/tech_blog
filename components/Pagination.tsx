@@ -1,12 +1,12 @@
 import React from "react";
 import Link from "next/link";
 
-// interface Props {
-//   maxPageNumber?: number;
-//   currentPageNumber: number;
-//   whatPage?: string;
-//   tagId?: string;
-// }
+interface Pagination {
+  totalCount?: number;
+  currentPageNumber: number;
+  whatPage?: string;
+  tagId?: string;
+}
 
 // export const Pagination: React.FC<Props> = React.memo((props) => {
 //   const { maxPageNumber, currentPageNumber, whatPage, tagId } = props;
@@ -39,17 +39,17 @@ import Link from "next/link";
 
 // Pagination.displayName = "Pagination";
 
-export const Pagination = ({ totalCount }) => {
+export const Pagination = ({ totalCount}: Pagination) => {
   const PER_PAGE = 5;
 
-  const range = (start, end) =>
+  const range = (start: number, end: number) =>
     [...Array(end - start + 1)].map((_, i) => start + i);
 
   return (
-    <ul className="inline-flex -space-x-px">
-      {range(1, Math.ceil(totalCount / PER_PAGE)).map((number, index) => (
-        <li className="px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" key={index}>
-          <Link href={`/blog/page/${number}`}>{number}</Link>
+    <ul className="flex justify-center mb-6">
+      {range(1, Math.ceil(totalCount! / PER_PAGE)).map((number, index) => (
+        <li key={index}>
+          <Link className="px-4 py-4 leading-tight text-gray-500 bg-white border border-gray-300 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white" href={`/blog/page/${number}`}>{number}</Link>
         </li>
       ))}
     </ul>
