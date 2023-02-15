@@ -42,7 +42,7 @@ export default function Home({ blog, totalCount }: Props) {
   );
 }
 
-// ssgでmicroCMSからブログデータを取得
+// ssgでmicroCMSから最新のブログデータを15件取得
 export const getStaticProps = async () => {
   const offset = 0;
   const limit = 15;
