@@ -1,0 +1,30 @@
+name: Deploy
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14.x'
+      - name: Install dependencies
+        run: npm install
+      - name: Fetch blog data from microCMS
+        run: node ./scripts/fetch-blog-data.js
+        env:
+          MICROCMS_API_KEY: ${{ secrets.MICROCMS_API_KEY }}
+      - name: Build site
+        run: npm run build
+      - name: Deploy site
+        uses: JamesIves/github-pages-deploy-action@releases/v4
+        with:
+          ACCESS_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: ./dist
