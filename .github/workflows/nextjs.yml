@@ -24,8 +24,8 @@ concurrency:
   cancel-in-progress: true
   
 env:
-  SERVICE_DOMAIN: ${{ secrets.SERVICE_DOMAIN }}
-  API_KEY: ${{ secrets.API_KEY }}
+  SERVICE_DOMAIN: ${{ secrets.MICROCMS_SERVICE_ID }}
+  API_KEY: ${{ secrets.MICROCMS_API_KEY }}
 
 jobs:
   # Build job
