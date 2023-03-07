@@ -22,6 +22,10 @@ permissions:
 concurrency:
   group: "pages"
   cancel-in-progress: true
+  
+env:
+  SERVICE_DOMAIN: ${{ secrets.SERVICE_DOMAIN }}
+  API_KEY: ${{ secrets.API_KEY }}
 
 jobs:
   # Build job
