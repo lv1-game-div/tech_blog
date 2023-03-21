@@ -18,11 +18,11 @@ export default function Home({ blog, totalCount }: Props) {
         {blog.map(blog => (
           <div className="rounded overflow-hidden shadow-lg" key={blog.id}>
             <img
-              className="w-full"
+              className="rounded object-contain"
               src={blog.thumbnail.url}
-              alt="Sunset in the mountains"
+              alt={blog.title}
             />
-            <div className="px-6 py-4">
+            <div className="h-20 px-6 py-4">
               <Link legacyBehavior href={`/blog/${blog.id}`} passHref>
                 <a>{blog.title}</a>
               </Link>
