@@ -3,6 +3,12 @@
 
 このプロジェクトは、tech_blogです。
 
+## vercelホスト
+https://nextjs-tech-blog.vercel.app/
+
+## GitHub Pagesホスト
+https://lv1-game-div.github.io/tech_blog
+
 ## 使用しているパッケージ
 
 ### [`tailwindcss`](https://tailwindcss.com/)
