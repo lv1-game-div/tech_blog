@@ -52,7 +52,7 @@ export const getStaticPaths = async () => {
   const paths = data.contents.map((content: { id: string; }) => `/${process.env.microcmsEndpoint}/${content.id}`);
   return {
     paths,
-    fallback: true,
+    fallback: false,
   };
 };
 
