@@ -46,7 +46,7 @@ export const getStaticPaths = async () => {
   const data = await client.get({
     endpoint: `${process.env.microcmsEndpoint}`,
     queries: {
-      limit: 15
+      limit: 10000
     }
   });
   const paths = data.contents.map((content: { id: string; }) => `/${process.env.microcmsEndpoint}/${content.id}`);
